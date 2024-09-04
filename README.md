@@ -12,7 +12,7 @@ This project automates the process of connecting a GitHub account with the Compo
 ### 1. Clone the Repository
 
 git clone https://github.com/yourusername/composio-github-integration.git
-cd composio-github-integration
+   - cd composio-github-integration
 
 ### 2. Install Dependencies
    - npm install
@@ -21,11 +21,11 @@ cd composio-github-integration
 
 Create a `.env` file in the root directory with the following content:
 
-GITHUB_USERNAME=your_github_username
-GITHUB_PASSWORD=your_github_password
-GITHUB_OTP_SECRET=your_2fa_secret_code
-GOOGLE_SCOPES= provide_google_api_scopes ( Example: ['https://www.googleapis.com/auth/gmail.readonly'] )
-USER_EMAIL= your_email_id
+ - GITHUB_USERNAME=your_github_username
+ - GITHUB_PASSWORD=your_github_password
+ - GITHUB_OTP_SECRET=your_2fa_secret_code
+ - GOOGLE_SCOPES= provide_google_api_scopes ( Example: ['https://www.googleapis.com/auth/gmail.readonly'] )
+ - USER_EMAIL= your_email_id
 
 ### 4. Set Up Gmail OAuth
 
