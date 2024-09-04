@@ -5,15 +5,15 @@ require('dotenv').config();
 async function gitHubAuthentication(page){
     await waitForPageLoad(page);
     if(await page.title() === "Sign in to GitHub · GitHub"){
-        await fillTextField(page, "#login_field", process.env.GITHUB_USERNAME);
-        await fillTextField(page, "#password", process.env.GITHUB_PASSWORD);
+        await fillTextField(page, "#login_field", process.env.USERNAME_FOR_GITHUB);
+        await fillTextField(page, "#password", process.env.PASSWORD_FOR_GITHUB);
         await clickButton(page, "//input[@value='Sign in']");
     }
 
     // generate OTP-for MFA
     await waitForPageLoad(page);
     try {
-        const otp = otplib.authenticator.generate(process.env.GITHUB_OTP_SECRET);
+        const otp = otplib.authenticator.generate(process.env.MFA_SECRET_FOR_GITHUB);
         if(await page.title() === "Two-factor authentication · GitHub"){
             await fillTextField(page, "#app_totp", otp);
         }
