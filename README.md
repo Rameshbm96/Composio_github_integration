@@ -24,8 +24,9 @@ Create a `.env` file in the root directory with the following content:
  - USERNAME_FOR_GITHUB = <your_github_username>
  - PASSWORD_FOR_GITHUB = <your_github_password>
  - MFA_SECRET_FOR_GITHUB = <your_2fa_secret_code>
- - GOOGLE_SCOPES= provide_google_api_scopes ( Example: ['https://www.googleapis.com/auth/gmail.readonly'] )
- - USER_EMAIL= your_email_id
+ - GOOGLE_SCOPES= <provide_google_api_scopes> #( Example: ['https://www.googleapis.com/auth/gmail.readonly'] )
+ - USER_EMAIL= <your_email_id>
+ - HEADLESS= <'true / false '>  # 'true' for headless and 'false' for headed mode
 
 ### 4. Set Up Gmail OAuth
 

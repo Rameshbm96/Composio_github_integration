@@ -13,7 +13,8 @@ const exp = require('constants');
 require('dotenv').config();
 
 test('gitHub connection with composio', async () => {
-    const browser = await chromium.launch({ headless: true });
+    const isHeadless = process.env.HEADLESS === 'true';
+    const browser = await chromium.launch({ headless: isHeadless });
     const context = await browser.newContext();
     const page = await context.newPage();
   
