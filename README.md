@@ -15,7 +15,7 @@ git clone https://github.com/yourusername/composio-github-integration.git
 cd composio-github-integration
 
 ### 2. Install Dependencies
-npm install
+   - npm install
 
 ### 3. Configure Environment Variables
 
