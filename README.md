@@ -48,12 +48,11 @@ You need to configure Gmail OAuth to handle email verification.
 You can run the tests using the following command:
 
 - To run in chrome browser in headed mode
-  npx playwright test --project chromium 
+    - npx playwright test --project chromium 
 
 - To run test in multiple browser in headed mode
-  npx playwright test 
+    - npx playwright test 
 
 ### 6. View Test Results
 Test results are automatically generated in the `test-results/` folder. You can also view the HTML report using:
-
-npx playwright show-report
+    - npx playwright show-report
