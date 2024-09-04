@@ -22,12 +22,19 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      - name: Install Playwright Browsers
+        run: npx playwright install
+
       - name: Copy OAuth Credentials
         run: |
           echo "${{ secrets.GOOGLE_CREDENTIALS_JSON }}" > credentials.json
           echo "${{ secrets.GOOGLE_TOKEN_JSON }}" > token.json
 
       - name: Run Playwright Tests
+        env:
+          USERNAME_FOR_GITHUB: ${{var.USERNAME_FOR_GITHUB}}
+          PASSWORD_FOR_GITHUB: ${{var.PASSWORD_FOR_GITHUB}}
+          MFA_SECRET_FOR_GITHUB: ${{var.MFA_SECRET_FOR_GITHUB}}
         run: npx playwright test --project chromium
 
       - name: Upload Playwright Test Results
