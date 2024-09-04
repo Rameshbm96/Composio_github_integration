@@ -5,7 +5,6 @@ This project automates the process of connecting a GitHub account with the Compo
 ## Project Structure
 
 composio-github-integration/
-│
 ├── node_modules/
 ├── pages/
 ├── playwright-report/
