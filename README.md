@@ -2,23 +2,6 @@
 
 This project automates the process of connecting a GitHub account with the Composio platform using Playwright. The setup includes Gmail OAuth for handling email verification and GitHub credentials for authorizing your account.
 
-## Project Structure
-
-composio-github-integration/
-├── node_modules/
-├── pages/
-├── playwright-report/
-├── test-results/
-├── tests/
-├── utils/
-├── .env
-├── .gitignore
-├── credentials.json
-├── package.json
-├── package-lock.json
-├── playwright.config.js
-└── token.json
-
 ## Prerequisites
 
 1. **Node.js**: Make sure you have Node.js installed. You can download it from [here](https://nodejs.org/).
