@@ -2,24 +2,6 @@
 
 This project automates the process of connecting a GitHub account with the Composio platform using Playwright. The setup includes Gmail OAuth for handling email verification and GitHub credentials for authorizing your account.
 
-## Project Structure
-
-composio-github-integration/
-│
-├── node_modules/
-├── pages/
-├── playwright-report/
-├── test-results/
-├── tests/
-├── utils/
-├── .env
-├── .gitignore
-├── credentials.json
-├── package.json
-├── package-lock.json
-├── playwright.config.js
-└── token.json
-
 ## Prerequisites
 
 1. **Node.js**: Make sure you have Node.js installed. You can download it from [here](https://nodejs.org/).
@@ -30,20 +12,20 @@ composio-github-integration/
 ### 1. Clone the Repository
 
 git clone https://github.com/yourusername/composio-github-integration.git
-cd composio-github-integration
+   - cd composio-github-integration
 
 ### 2. Install Dependencies
-npm install
+   - npm install
 
 ### 3. Configure Environment Variables
 
 Create a `.env` file in the root directory with the following content:
 
-GITHUB_USERNAME=your_github_username
-GITHUB_PASSWORD=your_github_password
-GITHUB_OTP_SECRET=your_2fa_secret_code
-GOOGLE_SCOPES= provide_google_api_scopes ( Example: ['https://www.googleapis.com/auth/gmail.readonly'] )
-USER_EMAIL= your_email_id
+ - GITHUB_USERNAME=your_github_username
+ - GITHUB_PASSWORD=your_github_password
+ - GITHUB_OTP_SECRET=your_2fa_secret_code
+ - GOOGLE_SCOPES= provide_google_api_scopes ( Example: ['https://www.googleapis.com/auth/gmail.readonly'] )
+ - USER_EMAIL= your_email_id
 
 ### 4. Set Up Gmail OAuth
 
@@ -66,12 +48,11 @@ You need to configure Gmail OAuth to handle email verification.
 You can run the tests using the following command:
 
 - To run in chrome browser in headed mode
-  npx playwright test --project chromium 
+    - npx playwright test --project chromium 
 
 - To run test in multiple browser in headed mode
-  npx playwright test 
+    - npx playwright test 
 
 ### 6. View Test Results
 Test results are automatically generated in the `test-results/` folder. You can also view the HTML report using:
-
-npx playwright show-report
+    - npx playwright show-report
