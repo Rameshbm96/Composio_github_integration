@@ -35,9 +35,9 @@ jobs:
       - name: Secure OAuth Credentials
         run: chmod 600 credentials.json token.json
 
-      - name: View Temporary Shell Files
-        run: cat /home/runner/work/_temp/*.sh
-
+      - name: Check token.json validity
+        run: cat token.json && jq . token.json
+        
       - name: Run Playwright Tests
         env:
           USERNAME_FOR_GITHUB: ${{vars.USERNAME_FOR_GITHUB}}
