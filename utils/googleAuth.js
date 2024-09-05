@@ -8,27 +8,79 @@ const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
 const TOKEN_PATH = path.join(process.cwd(), 'token.json');
 const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
 
+// Utility function to check if a file exists
+async function fileExists(filePath) {
+  try {
+    await fs.access(filePath, fs.constants.F_OK);
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
+// Load saved credentials if they exist
 async function loadSavedCredentialsIfExist() {
   try {
-    const content = await fs.readFile(TOKEN_PATH);
+    if (!(await fileExists(TOKEN_PATH))) {
+      console.error(`Token file not found: ${TOKEN_PATH}`);
+      return null;
+    }
+
+    const content = await fs.readFile(TOKEN_PATH, 'utf-8');
     const credentials = JSON.parse(content);
+    
+    if (!credentials) {
+      console.error('Token file is empty or invalid.');
+      return null;
+    }
+
     return google.auth.fromJSON(credentials);
   } catch (err) {
+    console.error(`Failed to load credentials from token.json: ${err.message}`);
     return null;
   }
 }
 
+// Save credentials to a file
 async function saveCredentials(client) {
-  const content = await fs.readFile(CREDENTIALS_PATH);
-  const keys = JSON.parse(content);
-  const key = keys.installed || keys.web;
-  const payload = JSON.stringify({
-    type: 'authorized_user',
-    client_id: key.client_id,
-    client_secret: key.client_secret,
-    refresh_token: client.credentials.refresh_token,
-  });
-  await fs.writeFile(TOKEN_PATH, payload);
+  try {
+    if (!(await fileExists(CREDENTIALS_PATH))) {
+      console.error(`Credentials file not found: ${CREDENTIALS_PATH}`);
+      return;
+    }
+
+    const content = await fs.readFile(CREDENTIALS_PATH, 'utf-8');
+    const keys = JSON.parse(content);
+
+    if (!keys || !(keys.installed || keys.web)) {
+      console.error('Invalid credentials file format.');
+      return;
+    }
+
+    const key = keys.installed || keys.web;
+
+    if (!key.client_id || !key.client_secret) {
+      console.error('Missing client_id or client_secret in credentials.json.');
+      return;
+    }
+
+    if (!client.credentials.refresh_token) {
+      console.error('Missing refresh_token in client credentials.');
+      return;
+    }
+
+    const payload = JSON.stringify({
+      type: 'authorized_user',
+      client_id: key.client_id,
+      client_secret: key.client_secret,
+      refresh_token: client.credentials.refresh_token,
+    });
+
+    await fs.writeFile(TOKEN_PATH, payload, 'utf-8');
+    console.log('Credentials saved successfully.');
+  } catch (err) {
+    console.error(`Failed to save credentials: ${err.message}`);
+  }
 }
 
 async function authorize() {
