@@ -32,11 +32,11 @@ jobs:
 
       - name: Run Playwright Tests
         env:
-          USERNAME_FOR_GITHUB: ${{secrets.USERNAME_FOR_GITHUB}}
+          USERNAME_FOR_GITHUB: ${{vars.USERNAME_FOR_GITHUB}}
           PASSWORD_FOR_GITHUB: ${{secrets.PASSWORD_FOR_GITHUB}}
           MFA_SECRET_FOR_GITHUB: ${{secrets.MFA_SECRET_FOR_GITHUB}}
-          USER_EMAIL: ${{secrets.USER_EMAIL}}
-          HEADLESS: ${{secrets.HEADLESS}}
+          USER_EMAIL: ${{vars.USER_EMAIL}}
+          HEADLESS: ${{vars.HEADLESS}}
         run: npx playwright test --project chromium
 
       - name: Upload Playwright Test Results
