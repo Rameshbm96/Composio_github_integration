@@ -14,6 +14,8 @@ require('dotenv').config();
 
 test('gitHub connection with composio', async () => {
     const isHeadless = process.env.HEADLESS === 'true';
+    console.log(isHeadless);
+    console.log(process.env.HEADLESS);
     const browser = await chromium.launch({ headless: isHeadless });
     const context = await browser.newContext();
     const page = await context.newPage();
