@@ -55,13 +55,6 @@ jobs:
           EOF
         shell: bash
 
-      - name: Display the JSON files
-        run: |
-          echo "credentials.json:"
-          cat credentials.json
-          echo "token.json:"
-          cat token.json
-
       - name: Secure OAuth Credentials
         run: chmod 600 credentials.json token.json
         
