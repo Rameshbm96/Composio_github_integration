@@ -27,9 +27,9 @@ jobs:
 
       - name: Copy OAuth Credentials
         run: |
-          echo "${{ secrets.GOOGLE_CREDENTIALS_JSON }}" > credentials.json
+          echo -e "${{ secrets.GOOGLE_CREDENTIALS_JSON }}" > credentials.json
           if [ "${{ secrets.GOOGLE_TOKEN_JSON }}" != "" ]; then
-            echo "${{ secrets.GOOGLE_TOKEN_JSON }}" > token.json
+            echo -e "${{ secrets.GOOGLE_TOKEN_JSON }}" > token.json
           fi
 
       - name: Secure OAuth Credentials
@@ -39,8 +39,10 @@ jobs:
         run: |
           echo "Credentials file:"
           head -c 100 credentials.json || echo "credentials.json not found"
+          cat Credentials.json
           echo "Token file:"
           head -c 100 token.json || echo "token.json not found"
+          cat Token.json
       
       - name: Run Playwright Tests
         env:
