@@ -24,7 +24,9 @@ test('gitHub connection with composio', async () => {
     console.log(`Opened ${APP_URL} on browser`);
     const loginPage = new LoginPage(page);
     await loginPage.enterUserMailAddress(process.env.USER_EMAIL);
+    console.log(`Entered the email address`);
     await loginPage.clickSendLogInLinkButton();
+    console.log(`Clicked the send-Login-Link button`);
 
     // Google-auth actions for Gmail to get Sign-in link from gmail-message
     await page.waitForLoadState('load');
@@ -39,17 +41,21 @@ test('gitHub connection with composio', async () => {
     const homePage = new HomePage(page);
     console.log(`Navigating to Tools catelogue Page`);
     await homePage.selectToolsCatelogue();
+    console.log(`Clicked on Tools catelogue option from side-menu`);
 
     // Tools-catelogue Page actions
     const appsPage = new AppsPage(page);
     console.log(`Searching for GitHub application and choosing the application`);
     await appsPage.searchAppByName('Github');
+    console.log(`Entered the Application name in Search text field`);
     await appsPage.selectApp();
+    console.log(`Selected the searched application`);
 
     // Application Page actions
     const appPage = new AppPage(page);
     console.log(`Navigating to Selected-application Page and performing Integration`);
     await appPage.setupAppIntegration();
+    console.log(`Have performed Setup-Integration action`);
 
     // App-connection Page actions
     const appConnectionPage = new AppConnectionPage(page);
@@ -59,6 +65,7 @@ test('gitHub connection with composio', async () => {
     ]);
 
     // Perform gitHub authontication
+    console.log(`Navigating to GitHub login Page`);
     await newPage.bringToFront();
     console.log(`Initiated GitHub authentication`);
     await gitHubAuthentication(newPage);
@@ -75,7 +82,9 @@ test('gitHub connection with composio', async () => {
     const connectedAccountPage = new ConnectedAccountPage(page);
     console.log(`Selecting the action for execution`);
     await connectedAccountPage.selectActionsOption();
+    console.log(`Clicked the Actions button`);
     await connectedAccountPage.selectAppAPItoExecute();
+    console.log(`Selected Api-endpoint to make call`);
     await connectedAccountPage.runSelectedAction();
     console.log(`Executed the selected action successfully`);
     await connectedAccountPage.selectUserIcon();
