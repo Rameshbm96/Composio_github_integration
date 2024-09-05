@@ -11,9 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install jq
-        run: sudo apt-get update && sudo apt-get install -y jq
-        
       - name: Checkout Code
         uses: actions/checkout@v4
 
@@ -28,17 +25,42 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install
         
-      - name: Debug Raw JSON
+      - name: Create credentials.json
         run: |
-          echo "${{ secrets.GOOGLE_CREDENTIALS_JSON }}"
-          echo "${{ secrets.GOOGLE_TOKEN_JSON }}"
+          cat <<EOF > credentials.json
+          {
+              "web": {
+                  "client_id": "${{secrets.CLIENT_ID}}",
+                  "project_id": "${{secrets.PROJECT_ID}}",
+                  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+                  "token_uri": "https://oauth2.googleapis.com/token",
+                  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+                  "client_secret": "${{secrets.CLIENT_SECRET}}",
+                  "redirect_uris": ["http://localhost/redirect"],
+                  "javascript_origins": ["http://localhost"]
+              }
+          }
+          EOF
+        shell: bash
+      
+      - name: Create token.json
+        run: |
+          cat <<EOF > token.json
+          {
+              "type": "authorized_user",
+              "client_id": "${{secrets.CLIENT_ID}}",
+              "client_secret": "${{secrets.CLIENT_SECRET}}",
+              "refresh_token": "${{secrets.REFRESH_TOKEN}}"
+          }
+          EOF
+        shell: bash
 
-      - name: Copy OAuth Credentials
+      - name: Display the JSON files
         run: |
-          echo -e "${{ secrets.GOOGLE_CREDENTIALS_JSON }}" | jq . > credentials.json
-          if [ "${{ secrets.GOOGLE_TOKEN_JSON }}" != "" ]; then
-            echo -e "${{ secrets.GOOGLE_TOKEN_JSON }}" | jq . > token.json
-          fi
+          echo "credentials.json:"
+          cat credentials.json
+          echo "token.json:"
+          cat token.json
 
       - name: Secure OAuth Credentials
         run: chmod 600 credentials.json token.json
