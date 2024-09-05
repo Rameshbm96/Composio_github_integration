@@ -36,7 +36,7 @@ jobs:
           PASSWORD_FOR_GITHUB: ${{secrets.PASSWORD_FOR_GITHUB}}
           MFA_SECRET_FOR_GITHUB: ${{secrets.MFA_SECRET_FOR_GITHUB}}
           USER_EMAIL: ${{vars.USER_EMAIL}}
-          HEADLESS: ${{vars.HEADLESS}}
+          HEADLESS: 'true'
         run: npx playwright test --project chromium
 
       - name: Upload Playwright Test Results
