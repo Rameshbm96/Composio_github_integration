@@ -24,15 +24,6 @@ class ConnectedAccountPage {
         await clickButton(this.page, this.runActionButton);
         await clickButton(this.page, this.runActionPopupCloseIcon);
     }
-
-    async selectUserIcon(){
-        await clickButton(this.page, this.userIcon);
-    }
-
-    async selectUserLogout(){
-        await clickButton(this.page, this.userLogoutOption);
-    }
-
 }
 
 module.exports = ConnectedAccountPage;
