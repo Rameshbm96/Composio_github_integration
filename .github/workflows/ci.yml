@@ -28,7 +28,12 @@ jobs:
       - name: Copy OAuth Credentials
         run: |
           echo "${{ secrets.GOOGLE_CREDENTIALS_JSON }}" > credentials.json
-          echo "${{ secrets.GOOGLE_TOKEN_JSON }}" > token.json
+          if [ "${{ secrets.GOOGLE_TOKEN_JSON }}" != "" ]; then
+            echo "${{ secrets.GOOGLE_TOKEN_JSON }}" > token.json
+          fi
+
+      - name: Secure OAuth Credentials
+        run: chmod 600 credentials.json token.json
 
       - name: Run Playwright Tests
         env:
