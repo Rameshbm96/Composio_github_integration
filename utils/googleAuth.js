@@ -41,7 +41,6 @@ async function authorize() {
           return client;
         }
         console.log("No saved credentials, authenticating with keyfile.");
-        console.log(CREDENTIALS_PATH);
         client = await authenticate({ scopes: SCOPES, keyfilePath: CREDENTIALS_PATH });
         if (client.credentials) {
           await saveCredentials(client);
