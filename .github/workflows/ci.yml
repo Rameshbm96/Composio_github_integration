@@ -39,10 +39,10 @@ jobs:
         run: |
           echo "Credentials file:"
           head -c 100 credentials.json || echo "credentials.json not found"
-          cat Credentials.json
+          cat credentials.json
           echo "Token file:"
           head -c 100 token.json || echo "token.json not found"
-          cat Token.json
+          cat token.json
       
       - name: Run Playwright Tests
         env:
