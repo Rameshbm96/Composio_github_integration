@@ -87,9 +87,5 @@ test('gitHub connection with composio', async () => {
     console.log(`Selected Api-endpoint to make call`);
     await connectedAccountPage.runSelectedAction();
     console.log(`Executed the selected action successfully`);
-    await connectedAccountPage.selectUserIcon();
-    console.log(`Performing the user-logout action`);
-    await connectedAccountPage.selectUserLogout();
-    console.log(`User successfully logged-out`);
     await page.close();
 })
