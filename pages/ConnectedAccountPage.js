@@ -7,8 +7,6 @@ class ConnectedAccountPage {
         this.gitHubRootApiButton = "//div[@title='Github api root']/following-sibling::div[3]/button";
         this.runActionButton = "//button[text()='Run action']";
         this.runActionPopupCloseIcon = "svg[class='lucide lucide-xcircle ']";
-        this.userIcon = "(//button[@type='button'])[2]";
-        this.userLogoutOption = "//div[@role='menuitem' and text()='Logout']";
     }
 
     async selectActionsOption(){
