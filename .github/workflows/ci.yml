@@ -27,6 +27,11 @@ jobs:
 
       - name: Install Playwright Browsers
         run: npx playwright install
+        
+      - name: Debug Raw JSON
+        run: |
+          echo "${{ secrets.GOOGLE_CREDENTIALS_JSON }}"
+          echo "${{ secrets.GOOGLE_TOKEN_JSON }}"
 
       - name: Copy OAuth Credentials
         run: |
