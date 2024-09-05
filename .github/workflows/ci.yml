@@ -43,6 +43,12 @@ jobs:
           echo "Token file:"
           head -c 100 token.json || echo "token.json not found"
           cat token.json
+
+      - name: Print working directory
+        run: pwd
+        
+      - name: List files
+        run: ls -la
       
       - name: Run Playwright Tests
         env:
