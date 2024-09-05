@@ -35,6 +35,13 @@ jobs:
       - name: Secure OAuth Credentials
         run: chmod 600 credentials.json token.json
 
+      - name: Debug OAuth Credentials
+        run: |
+          echo "Credentials file:"
+          head -c 100 credentials.json || echo "credentials.json not found"
+          echo "Token file:"
+          head -c 100 token.json || echo "token.json not found"
+      
       - name: Run Playwright Tests
         env:
           USERNAME_FOR_GITHUB: ${{vars.USERNAME_FOR_GITHUB}}

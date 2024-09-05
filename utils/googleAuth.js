@@ -32,15 +32,27 @@ async function saveCredentials(client) {
 }
 
 async function authorize() {
-  let client = await loadSavedCredentialsIfExist();
-  if (client) {
-    return client;
-  }
-  client = await authenticate({ scopes: SCOPES, keyfilePath: CREDENTIALS_PATH });
-  if (client.credentials) {
-    await saveCredentials(client);
-  }
-  return client;
+    let attempts = 3;
+    while (attempts > 0) {
+      try {
+        let client = await loadSavedCredentialsIfExist();
+        if (client) {
+          console.log("Loaded saved credentials.");
+          return client;
+        }
+        console.log("No saved credentials, authenticating with keyfile.");
+        client = await authenticate({ scopes: SCOPES, keyfilePath: CREDENTIALS_PATH });
+        if (client.credentials) {
+          await saveCredentials(client);
+        }
+        console.log("Successfully authenticated.");
+        return client;
+      } catch (error) {
+        attempts--;
+        console.error(`Authorization failed, ${attempts} attempts remaining: ${error.message}`);
+        if (attempts === 0) throw error;  
+      }
+    }
 }
 
 async function getSignInLink(oAuth2Client) {
