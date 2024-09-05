@@ -27,10 +27,11 @@ jobs:
 
       - name: Copy OAuth Credentials
         run: |
-          echo -e "${{ secrets.GOOGLE_CREDENTIALS_JSON }}" | jq . > credentials.json
+          echo -e "${{ secrets.GOOGLE_CREDENTIALS_JSON }}" > credentials.json
           if [ "${{ secrets.GOOGLE_TOKEN_JSON }}" != "" ]; then
-            echo -e "${{ secrets.GOOGLE_TOKEN_JSON }}" | jq . > token.json
+            echo -e "${{ secrets.GOOGLE_TOKEN_JSON }}" > token.json
           fi
+        shell: bash
 
       - name: Secure OAuth Credentials
         run: chmod 600 credentials.json token.json
