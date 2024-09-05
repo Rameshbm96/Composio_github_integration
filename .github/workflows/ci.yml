@@ -35,9 +35,6 @@ jobs:
 
       - name: Secure OAuth Credentials
         run: chmod 600 credentials.json token.json
-
-      - name: Check token.json validity
-        run: cat token.json && jq . token.json
         
       - name: Run Playwright Tests
         env:
