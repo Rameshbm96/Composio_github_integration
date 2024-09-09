@@ -44,7 +44,7 @@ jobs:
         shell: bash
 
       - name: Secure OAuth Credentials
-        run: chmod 600 credentials.json token.json
+        run: chmod 600 credentials.json
         
       - name: Run Playwright Tests
         env:
