@@ -83,6 +83,21 @@ async function saveCredentials(client) {
   }
 }
 
+// Refresh access token if needed
+async function refreshAccessTokenIfNeeded(client) {
+  if (client.credentials.expiry_date && client.credentials.expiry_date <= Date.now()) {
+    try {
+      console.log('Refreshing access token...');
+      const newToken = await client.refreshAccessToken();
+      client.setCredentials(newToken.credentials);
+      await saveCredentials(client);
+      console.log('Access token refreshed successfully.');
+    } catch (err) {
+      console.error('Failed to refresh access token:', err.message);
+    }
+  }
+}
+
 async function authorize() {
     let attempts = 3;
     while (attempts > 0) {
@@ -90,6 +105,8 @@ async function authorize() {
         let client = await loadSavedCredentialsIfExist();
         if (client) {
           console.log("Loaded saved credentials.");
+          // Check if token needs refreshing before proceeding
+          await refreshAccessTokenIfNeeded(client);
           return client;
         }
         console.log("No saved credentials, authenticating with keyfile.");
