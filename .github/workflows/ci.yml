@@ -43,8 +43,20 @@ jobs:
           EOF
         shell: bash
 
+      - name: Create token.json
+        run: |
+          cat <<EOF > token.json
+          {
+              "type": "authorized_user",
+              "client_id": "${{secrets.CLIENT_ID}}",
+              "client_secret": "${{secrets.CLIENT_SECRET}}",
+              "refresh_token": "${{secrets.REFRESH_TOKEN}}"
+          }
+          EOF
+        shell: bash
+        
       - name: Secure OAuth Credentials
-        run: chmod 600 credentials.json
+        run: chmod 600 credentials.json token.json
         
       - name: Run Playwright Tests
         env:
