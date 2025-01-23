@@ -3,7 +3,7 @@ class LoginPage {
     constructor(page) {
         this.page = page;
         this.emailTextField = "//input[@type='email']";
-        this.sendLogInLinkButton = "(//button[@title='Get Magic Link'])[2]";
+        this.sendLogInLinkButton = "//button[.='Continue with email']";
     }
 
     async enterUserMailAddress(mailId){
