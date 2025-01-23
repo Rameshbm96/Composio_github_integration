@@ -80,3 +80,22 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
+      # Slack notification on failure
+      - name: Notify Slack on Failure
+        if: failure() # Only runs when a previous step fails
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{
+            "text": "🚨 *Test Failed* 🚨\nJob: `CI/CD Pipeline`\nBranch: `main`\nView details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+            "attachments": [
+              {
+                "color": "danger",
+                "fields": [
+                  {
+                    "title": "Error",
+                    "value": "Test execution failed. Please check the logs for details."
+                  }
+                ]
+              }
+            ]
+          }' ${{ secrets.SLACK_WEBHOOK_URL }}
